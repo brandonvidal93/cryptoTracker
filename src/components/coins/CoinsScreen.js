@@ -1,10 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, StyleSheet, FlatList} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
 import Http from '../../libs/http';
+import CoinItem from './CoinItem';
 
 export const CoinsScreen = props => {
   /* This is a React Hook that is used to create a state variable. */
   const [coins, setCoins] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const urlAPI = 'https://api.coinlore.net/api/tickers/';
 
@@ -14,11 +22,17 @@ export const CoinsScreen = props => {
    */
 
   const callAPI = async () => {
+    /* Setting the state variable `loading` to `true`. */
+    setLoading(true);
+
     /* Calling the API and waiting for the response. */
     const coinsResponse = await Http.instance.get(urlAPI);
 
     /* Setting the state variable `coins` to the response of the API. */
     setCoins(coinsResponse.data);
+
+    /* Setting the state variable `loading` to `false`. */
+    setLoading(false);
   };
 
   /* This is a React Hook that is used to run a function when the component is mounted. */
@@ -30,9 +44,15 @@ export const CoinsScreen = props => {
     <View style={styles.container}>
       <Text style={styles.title}>Coins Screen</Text>
 
+      {/* Rendering an ActivityIndicator component if the state variable `loading` is `true`. */}
+      {loading ? (
+        <ActivityIndicator color="#000" size="large" style={styles.loading} />
+      ) : null}
+
+      {/* Rendering a list of items. */}
       <FlatList
         data={coins}
-        renderItem={({item}) => <Text style={styles.text}>{item.name}</Text>}
+        renderItem={({item}) => <CoinItem item={item} />}
         style={styles.list}
       />
     </View>
@@ -59,7 +79,6 @@ const styles = StyleSheet.create({
   text: {
     color: '#000',
     fontSize: 16,
-    fontWeight: 'bold',
   },
   ['button-primary']: {
     width: '100%',
@@ -73,5 +92,8 @@ const styles = StyleSheet.create({
   },
   list: {
     width: '100%',
+  },
+  loading: {
+    flex: 1,
   },
 });
