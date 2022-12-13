@@ -12,9 +12,6 @@ export const CoinsScreen = props => {
    * When the user presses the button, the console will log the props, and then the user will be
    * navigated to the Coin Detail screen
    */
-  // const handlePress = () => {
-  //   props.navigation.navigate('Coin Detail');
-  // };
 
   const callAPI = async () => {
     /* Calling the API and waiting for the response. */
@@ -32,11 +29,6 @@ export const CoinsScreen = props => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Coins Screen</Text>
-
-      {/* Creating a button that will call the `handlePress` function when it is pressed. */}
-      {/* <Pressable onPress={handlePress} style={styles['button-primary']}>
-        <Text style={styles['button-text']}>Go to detail</Text>
-      </Pressable> */}
 
       <FlatList
         data={coins}
