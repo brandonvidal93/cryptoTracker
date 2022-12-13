@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import Http from '../../libs/http';
 import CoinItem from './CoinItem';
+import Colors from '../../res/colors';
 
 export const CoinsScreen = props => {
   /* This is a React Hook that is used to create a state variable. */
@@ -28,6 +29,8 @@ export const CoinsScreen = props => {
     /* Calling the API and waiting for the response. */
     const coinsResponse = await Http.instance.get(urlAPI);
 
+    console.log('coinsResponse', coinsResponse);
+
     /* Setting the state variable `coins` to the response of the API. */
     setCoins(coinsResponse.data);
 
@@ -46,7 +49,11 @@ export const CoinsScreen = props => {
 
       {/* Rendering an ActivityIndicator component if the state variable `loading` is `true`. */}
       {loading ? (
-        <ActivityIndicator color="#000" size="large" style={styles.loading} />
+        <ActivityIndicator
+          color={Colors.white}
+          size="large"
+          style={styles.loading}
+        />
       ) : null}
 
       {/* Rendering a list of items. */}
@@ -65,12 +72,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#fff',
-    paddingLeft: 16,
-    paddingRight: 16,
+    backgroundColor: Colors.charade,
+    padding: 16,
   },
   title: {
-    color: '#000',
+    color: Colors.zircon,
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
