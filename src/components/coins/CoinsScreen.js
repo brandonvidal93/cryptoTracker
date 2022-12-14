@@ -29,8 +29,6 @@ export const CoinsScreen = props => {
     /* Calling the API and waiting for the response. */
     const coinsResponse = await Http.instance.get(urlAPI);
 
-    console.log('coinsResponse', coinsResponse);
-
     /* Setting the state variable `coins` to the response of the API. */
     setCoins(coinsResponse.data);
 
@@ -73,7 +71,8 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: Colors.charade,
-    padding: 16,
+    paddingTop: 16,
+    paddingBottom: 16,
   },
   title: {
     color: Colors.zircon,
