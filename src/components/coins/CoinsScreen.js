@@ -18,10 +18,11 @@ export const CoinsScreen = props => {
   const urlAPI = 'https://api.coinlore.net/api/tickers/';
 
   /**
-   * When the user presses the button, the console will log the props, and then the user will be
-   * navigated to the Coin Detail screen
+   * "Call the API and set the state variables `coins` and `loading`."
+   *
+   * The function is `async` because it uses the `await` keyword. The `await` keyword is used to wait
+   * for a promise to resolve
    */
-
   const callAPI = async () => {
     /* Setting the state variable `loading` to `true`. */
     setLoading(true);
@@ -36,6 +37,9 @@ export const CoinsScreen = props => {
     setLoading(false);
   };
 
+  /**
+   * When the user presses a coin, navigate to the Coin Detail screen and pass the coin as a parameter
+   */
   const handlePress = coin => {
     props.navigation.navigate('Coin Detail', {coin});
   };

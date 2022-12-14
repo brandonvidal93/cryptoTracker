@@ -6,6 +6,11 @@ const CoinItem = ({item, onPress}) => {
   /* Destructuring the item object. */
   const {symbol, name, percent_change_1h, price_usd} = item;
 
+  /**
+   * If the percent change in the last hour is greater than 0, return the image of an arrow pointing
+   * up, otherwise return the image of an arrow pointing down
+   * @returns The image of the arrow.
+   */
   const getImgArrow = () => {
     if (percent_change_1h > 0) {
       return require('../../assets/images/arrow_up.png');
