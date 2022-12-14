@@ -8,11 +8,13 @@ import {
 } from 'react-native';
 import Http from '../../libs/http';
 import CoinItem from './CoinItem';
+import CoinSearch from './CoinSearch';
 import Colors from '../../res/colors';
 
 export const CoinsScreen = props => {
   /* This is a React Hook that is used to create a state variable. */
   const [coins, setCoins] = useState([]);
+  const [allCoins, setAllCoins] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const urlAPI = 'https://api.coinlore.net/api/tickers/';
@@ -32,6 +34,7 @@ export const CoinsScreen = props => {
 
     /* Setting the state variable `coins` to the response of the API. */
     setCoins(coinsResponse.data);
+    setAllCoins(coinsResponse.data);
 
     /* Setting the state variable `loading` to `false`. */
     setLoading(false);
@@ -44,6 +47,21 @@ export const CoinsScreen = props => {
     props.navigation.navigate('Coin Detail', {coin});
   };
 
+  /**
+   * It takes a query as an argument, filters the allCoins array to only include coins whose name or
+   * symbol includes the query, and then sets the coins state to the filtered array
+   */
+  const handleSearch = query => {
+    const coinsFiltered = allCoins.filter(coin => {
+      return (
+        coin.name.toLowerCase().includes(query.toLowerCase()) ||
+        coin.symbol.toLowerCase().includes(query.toLowerCase())
+      );
+    });
+
+    setCoins(coinsFiltered);
+  };
+
   /* This is a React Hook that is used to run a function when the component is mounted. */
   useEffect(() => {
     callAPI();
@@ -51,7 +69,9 @@ export const CoinsScreen = props => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Coins Screen</Text>
+      <Text style={styles.title}>Cripto Tracker</Text>
+
+      <CoinSearch onChange={handleSearch} style={styles['input-search']} />
 
       {/* Rendering an ActivityIndicator component if the state variable `loading` is `true`. */}
       {loading ? (
@@ -78,9 +98,7 @@ export const CoinsScreen = props => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    backgroundColor: Colors.charade,
+    backgroundColor: Colors.blackPearl,
     paddingTop: 16,
     paddingBottom: 16,
   },
@@ -110,5 +128,8 @@ const styles = StyleSheet.create({
   },
   loading: {
     flex: 1,
+  },
+  ['input-search']: {
+    width: '100%',
   },
 });
