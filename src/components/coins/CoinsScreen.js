@@ -36,6 +36,10 @@ export const CoinsScreen = props => {
     setLoading(false);
   };
 
+  const handlePress = coin => {
+    props.navigation.navigate('Coin Detail', {coin});
+  };
+
   /* This is a React Hook that is used to run a function when the component is mounted. */
   useEffect(() => {
     callAPI();
@@ -57,7 +61,9 @@ export const CoinsScreen = props => {
       {/* Rendering a list of items. */}
       <FlatList
         data={coins}
-        renderItem={({item}) => <CoinItem item={item} />}
+        renderItem={({item}) => (
+          <CoinItem item={item} onPress={() => handlePress(item)} />
+        )}
         style={styles.list}
       />
     </View>
