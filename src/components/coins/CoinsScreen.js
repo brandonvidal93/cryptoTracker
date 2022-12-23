@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   FlatList,
   ActivityIndicator,
@@ -69,8 +68,6 @@ export const CoinsScreen = props => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Cripto Tracker</Text>
-
       <CoinSearch onChange={handleSearch} style={styles['input-search']} />
 
       {/* Rendering an ActivityIndicator component if the state variable `loading` is `true`. */}
@@ -99,8 +96,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.blackPearl,
-    paddingTop: 16,
-    paddingBottom: 16,
   },
   title: {
     color: Colors.zircon,
