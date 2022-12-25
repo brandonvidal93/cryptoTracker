@@ -6,14 +6,18 @@ import {
   Image,
   SectionList,
   FlatList,
+  Pressable,
+  Alert,
 } from 'react-native';
 import Http from '../../libs/http';
+import Storage from '../../libs/storage';
 import Colors from '../../res/colors';
 import CoinMarketItem from './CoinMarketItem';
 
 export const CoinDetailScreen = props => {
   const [coinData, setCoinData] = useState({});
   const [markets, setMarkets] = useState([]);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   /**
    * If the nameid is true, return the image url with the nameid, otherwise return the image url with
@@ -64,6 +68,63 @@ export const CoinDetailScreen = props => {
     setMarkets(marketsData);
   };
 
+  const toggleFavorite = () => {
+    if (isFavorite) {
+      removeFavorite();
+    } else {
+      addFavorite();
+    }
+  };
+
+  const addFavorite = async () => {
+    const coin = JSON.stringify(coinData);
+
+    const key = `favorite-${coinData.id}`;
+
+    const stored = await Storage.instance.store(key, coin);
+
+    if (stored) {
+      setIsFavorite(true);
+    } else {
+      console.log('Something went wrong');
+    }
+  };
+
+  const removeFavorite = async () => {
+    Alert.alert('Remove favorite', 'Are you sure?', [
+      {
+        text: 'Cancel',
+        onPress: () => {},
+        style: 'cancel',
+      },
+      {
+        text: 'Remove',
+        onPress: async () => {
+          const key = `favorite-${coinData.id}`;
+
+          await Storage.instance.remove(key);
+
+          setIsFavorite(false);
+        },
+        style: 'destructive',
+      },
+    ]);
+  };
+
+  const getFavorite = async (coin) => {
+    try {
+      const key = `favorite-${coinData.id}`;
+
+      const favStr = await Storage.instance.get(key);
+
+      if (favStr != null) {
+        setIsFavorite(true);
+      }
+    } catch (err) {
+      console.log('Get favorite err', err);
+    }
+  };
+
   /* A hook that is called when the component is mounted. It is used to set the title of the screen and
   the coin data. */
   useEffect(() => {
@@ -74,16 +135,33 @@ export const CoinDetailScreen = props => {
     setCoinData(coin);
 
     getMarkets(coin.id);
-  }, [props.navigation, props.route.params]);
+
+    getFavorite(coin);
+  }, [getFavorite, props.navigation, props.route.params]);
 
   return (
     <View style={styles.container}>
       <View style={styles['sub-header']}>
-        <Image
-          style={styles['symbol-coin']}
-          source={{uri: getSymbolIcon(coinData.nameid)}}
-        />
-        <Text style={styles.title}>{coinData.name}</Text>
+        <View style={styles.row}>
+          <Image
+            style={styles['symbol-coin']}
+            source={{uri: getSymbolIcon(coinData.nameid)}}
+          />
+          <Text style={styles.title}>{coinData.name}</Text>
+        </View>
+
+        <Pressable
+          onPress={toggleFavorite}
+          style={[
+            styles['btn-favorite'],
+            !isFavorite
+              ? styles['btn-favorite-add']
+              : styles['btn-favorite-remove'],
+          ]}>
+          <Text style={styles['btn-favorite-text']}>
+            {!isFavorite ? 'Add favorite' : 'Remove favorite'}
+          </Text>
+        </Pressable>
       </View>
       <SectionList
         style={styles.section}
@@ -119,9 +197,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.charade,
   },
+  row: {
+    flexDirection: 'row',
+  },
   ['sub-header']: {
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.1)',
     padding: 16,
@@ -170,5 +251,18 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 8,
     marginBottom: 16,
+  },
+  ['btn-favorite']: {
+    padding: 8,
+    borderRadius: 8,
+  },
+  ['btn-favorite-add']: {
+    backgroundColor: Colors.picton,
+  },
+  ['btn-favorite-remove']: {
+    backgroundColor: Colors.carmine,
+  },
+  ['btn-favorite-text']: {
+    color: Colors.white,
   },
 });
