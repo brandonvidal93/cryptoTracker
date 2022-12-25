@@ -5,6 +5,7 @@ import CoinsStack from './src/components/coins/CoinsStack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Colors from './src/res/colors';
 import FavoritesStack from './src/components/favorites/FavoritesStack';
+import UserStack from './src/components/user/UserStack';
 
 const Tabs = createBottomTabNavigator();
 
@@ -33,12 +34,24 @@ const App = () => {
           }}
         />
         <Tabs.Screen
-          name="Favorites Coins"
+          name="Favorites"
           component={FavoritesStack}
           options={{
             tabBarIcon: ({size, color}) => (
               <Image
                 source={require('./src/assets/images/star.png')}
+                style={{tintColor: color, width: size, height: size}}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="User"
+          component={UserStack}
+          options={{
+            tabBarIcon: ({size, color}) => (
+              <Image
+                source={require('./src/assets/images/user.png')}
                 style={{tintColor: color, width: size, height: size}}
               />
             ),
