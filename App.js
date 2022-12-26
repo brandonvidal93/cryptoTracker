@@ -22,6 +22,7 @@ const App = () => {
           tabBarInactiveBackgroundColor: Colors.blackPearl,
         }}>
         <Tabs.Screen
+          testID="tab-coins"
           name="Coins"
           component={CoinsStack}
           options={{
@@ -34,6 +35,7 @@ const App = () => {
           }}
         />
         <Tabs.Screen
+          testID="tab-favorites"
           name="Favorites"
           component={FavoritesStack}
           options={{

@@ -60,13 +60,13 @@ export const CoinDetailScreen = props => {
    * It takes a coinId as an argument, makes a request to the Coinlore API, and sets the markets data
    * to the state
    */
-  const getMarkets = async coinId => {
-    const url = `https://api.coinlore.net/api/coin/markets/?id=${coinId}`;
+  // const getMarkets = async coinId => {
+  //   const url = `https://api.coinlore.net/api/coin/markets/?id=${coinId}`;
 
-    const marketsData = await Http.instance.get(url);
+  //   const marketsData = await Http.instance.get(url);
 
-    setMarkets(marketsData);
-  };
+  //   setMarkets(marketsData);
+  // };
 
   const toggleFavorite = () => {
     if (isFavorite) {
@@ -134,7 +134,7 @@ export const CoinDetailScreen = props => {
 
     setCoinData(coin);
 
-    getMarkets(coin.id);
+    // getMarkets(coin.id);
 
     getFavorite(coin);
   }, [getFavorite, props.navigation, props.route.params]);
@@ -151,6 +151,7 @@ export const CoinDetailScreen = props => {
         </View>
 
         <Pressable
+          testID="btn-favorite"
           onPress={toggleFavorite}
           style={[
             styles['btn-favorite'],
@@ -181,13 +182,13 @@ export const CoinDetailScreen = props => {
 
       <Text style={styles['title-markets']}>Markets</Text>
 
-      <FlatList
+      {/* <FlatList
         horizontal={true}
         data={markets}
         renderItem={({item}) => <CoinMarketItem item={item} />}
         keyExtractor={item => `${item.base}-${item.name}-${item.quote}`}
         style={styles.list}
-      />
+      /> */}
     </View>
   );
 };

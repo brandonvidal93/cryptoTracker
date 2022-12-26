@@ -4,7 +4,7 @@ import Colors from '../../res/colors';
 
 const CoinItem = ({item, onPress}) => {
   /* Destructuring the item object. */
-  const {symbol, name, percent_change_1h, price_usd} = item;
+  const {symbol, name, percent_change_1h, price_usd, id} = item;
 
   /**
    * If the percent change in the last hour is greater than 0, return the image of an arrow pointing
@@ -20,7 +20,7 @@ const CoinItem = ({item, onPress}) => {
   };
 
   return (
-    <Pressable onPress={onPress} style={styles.container}>
+    <Pressable onPress={onPress} style={styles.container} testID={`item-${id}`}>
       <View style={styles.row}>
         {
           // Rendering the symbol of the coin.
