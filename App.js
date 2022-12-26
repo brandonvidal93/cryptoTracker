@@ -7,6 +7,15 @@ import Colors from './src/res/colors';
 import FavoritesStack from './src/components/favorites/FavoritesStack';
 import UserStack from './src/components/user/UserStack';
 
+import * as Sentry from '@sentry/react-native';
+
+Sentry.init({
+  dsn: 'https://9a01a91cc97a4827a085bca5476001a7@o4504397112147968.ingest.sentry.io/4504397113196544',
+  enableNative: false,
+});
+
+Sentry.nativeCrash();
+
 const Tabs = createBottomTabNavigator();
 
 const App = () => {
