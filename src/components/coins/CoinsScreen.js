@@ -81,6 +81,7 @@ export const CoinsScreen = props => {
 
       {/* Rendering a list of items. */}
       <FlatList
+        testID="coin-list"
         data={coins}
         renderItem={({item}) => (
           <CoinItem item={item} onPress={() => handlePress(item)} />

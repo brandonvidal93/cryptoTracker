@@ -13,22 +13,40 @@ const CoinItem = ({item, onPress}) => {
    */
   const getImgArrow = () => {
     if (percent_change_1h > 0) {
-      return require('../../assets/images/arrow_up.png');
+      return require('cryptoTracker/src/assets/images/arrow_up.png');
     } else {
-      return require('../../assets/images/arrow_down.png');
+      return require('cryptoTracker/src/assets/images/arrow_down.png');
     }
   };
 
   return (
     <Pressable onPress={onPress} style={styles.container}>
       <View style={styles.row}>
-        <Text style={styles['symbol-text']}>{symbol}</Text>
-        <Text style={styles['name-text']}>{name}</Text>
+        {
+          // Rendering the symbol of the coin.
+          symbol && (
+            <Text testID="txt-symbol" style={styles['symbol-text']}>
+              {symbol}
+            </Text>
+          )
+        }
+        {
+          // Rendering the name of the coin.
+          name && (
+            <Text testID="txt-name" style={styles['name-text']}>
+              {name}
+            </Text>
+          )
+        }
         <Text style={styles['price-text']}>{`$ ${price_usd}`}</Text>
       </View>
       <View style={styles.row}>
         <Text style={styles['percent-text']}>{percent_change_1h}</Text>
-        <Image style={styles.imageIcon} source={getImgArrow()} />
+        <Image
+          testID="img-arrow"
+          style={styles.imageIcon}
+          source={getImgArrow()}
+        />
       </View>
     </Pressable>
   );
