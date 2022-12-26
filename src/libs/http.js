@@ -1,3 +1,5 @@
+import * as Sentry from '@sentry/react-native';
+
 class Http {
   static instance = new Http();
 
@@ -8,7 +10,7 @@ class Http {
       return json;
     } catch (err) {
       console.log('http get method err', err);
-      throw Error(err);
+      Sentry.captureException(err);
     }
   };
 

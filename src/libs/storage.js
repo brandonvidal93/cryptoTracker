@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Sentry from '@sentry/react-native';
 
 class Storage {
   /* Creating a new instance of the Storage class. */
@@ -24,7 +25,7 @@ class Storage {
     } catch (err) {
       console.log('Storage get error', err);
 
-      throw Error(err);
+      Sentry.captureException(err);
     }
   };
 
@@ -35,7 +36,7 @@ class Storage {
     } catch (err) {
       console.log('Storage getAll error', err);
 
-      throw Error(err);
+      Sentry.captureException(err);
     }
   };
 

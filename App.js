@@ -10,11 +10,26 @@ import UserStack from './src/components/user/UserStack';
 import * as Sentry from '@sentry/react-native';
 
 Sentry.init({
-  dsn: 'https://9a01a91cc97a4827a085bca5476001a7@o4504397112147968.ingest.sentry.io/4504397113196544',
-  enableNative: false,
-});
+  dsn: 'https://1376efd079f34f649c71a402081f7d25@o4504397112147968.ingest.sentry.io/4504397113196544',
+  maxBreadcrumbs: 150,
+  debug: true, // Sentry will try to print out useful debugging information if something goes wrong with sending an event. Set this to `false` in production.
 
-Sentry.nativeCrash();
+  // Release Health
+  enableAutoSessionTracking: true,
+  autoSessionTrackingIntervalMillis: 5000,
+
+  // Offline caching
+  enableNative: false,
+
+  integrations: [
+    new Sentry.ReactNativeTracing({
+      tracingOrigins: ['localhost', 'my-site-url.com', /^\//],
+      // ... other options
+    }),
+  ],
+
+  tracesSampleRate: 1.0,
+});
 
 const Tabs = createBottomTabNavigator();
 
@@ -73,4 +88,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Sentry.wrap(App);
