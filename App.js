@@ -5,7 +5,7 @@ import CoinsStack from './src/components/coins/CoinsStack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Colors from './src/res/colors';
 import FavoritesStack from './src/components/favorites/FavoritesStack';
-import UserStack from './src/components/user/UserStack';
+// import UserStack from './src/components/user/UserStack';
 
 import * as Sentry from '@sentry/react-native';
 

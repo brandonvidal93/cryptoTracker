@@ -1,4 +1,5 @@
 import 'react';
+import React from 'react';
 import {render} from '@testing-library/react-native';
 import CoinItem from '../src/components/coins/CoinItem';
 

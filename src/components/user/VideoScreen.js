@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Pressable,
-  StyleSheet,
-} from 'react-native';
-import Colors from '../../res/colors';
+import {View, Text} from 'react-native';
 
 const VideoScreen = () => {
   return (

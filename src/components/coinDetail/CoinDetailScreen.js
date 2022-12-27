@@ -1,22 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import {
   View,
   Text,
   StyleSheet,
   Image,
   SectionList,
-  FlatList,
+  // FlatList,
   Pressable,
   Alert,
 } from 'react-native';
-import Http from '../../libs/http';
+// import Http from '../../libs/http';
 import Storage from '../../libs/storage';
 import Colors from '../../res/colors';
-import CoinMarketItem from './CoinMarketItem';
+// import CoinMarketItem from './CoinMarketItem';
 
 export const CoinDetailScreen = props => {
   const [coinData, setCoinData] = useState({});
-  const [markets, setMarkets] = useState([]);
+  // const [markets, setMarkets] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
 
   /**
@@ -111,19 +111,19 @@ export const CoinDetailScreen = props => {
     ]);
   };
 
-  const getFavorite = async (coin) => {
+  const getFavorite = useCallback(async () => {
     try {
       const key = `favorite-${coinData.id}`;
 
       const favStr = await Storage.instance.get(key);
 
-      if (favStr != null) {
+      if (favStr !== null) {
         setIsFavorite(true);
       }
-    } catch (err) {
-      console.log('Get favorite err', err);
+    } catch (error) {
+      console.log('Get favorite error', error);
     }
-  };
+  }, [coinData]);
 
   /* A hook that is called when the component is mounted. It is used to set the title of the screen and
   the coin data. */

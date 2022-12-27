@@ -1,10 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-} from 'react-native';
+import {View, StyleSheet, FlatList} from 'react-native';
 import Colors from '../../res/colors';
 import FavoritesEmptyState from './FavoritesEmptyState';
 import CoinItem from '../coins/CoinItem';

@@ -51,8 +51,7 @@ const PictureScreen = () => {
           return <WaitingView />;
         }
         return (
-          <View
-            style={{flex: 0, flexDirection: 'row', justifyContent: 'center'}}>
+          <View>
             {pausePreview ? (
               <TouchableOpacity
                 onPress={() => resumePicture(camera)}

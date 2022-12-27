@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 describe('Example', () => {
   beforeAll(async () => {
     // // mock for markets
@@ -39,7 +40,9 @@ describe('Example', () => {
 
   it('Debería acceder a la lista de favoritos', async () => {
     await element(by.label('Favorites')).tap();
-    await expect(element(by.text(`You don't have any favorite yet`))).toBeVisible();
+    await expect(
+      element(by.text("You don't have any favorite yet")),
+    ).toBeVisible();
   });
 
   it('Deberia hacer tap sobre el primer elemento de la FlatList y agregar a favoritos', async () => {
@@ -58,6 +61,8 @@ describe('Example', () => {
 
     await element(by.label('Favorites')).tap();
 
-    await expect(element(by.text(`You don't have any favorite yet`))).toBeVisible();
+    await expect(
+      element(by.text("You don't have any favorite yet")),
+    ).toBeVisible();
   });
 });
