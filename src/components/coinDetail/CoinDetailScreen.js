@@ -180,7 +180,7 @@ export const CoinDetailScreen = props => {
         )}
       />
 
-      <Text style={styles['title-markets']}>Markets</Text>
+      {/* <Text style={styles['title-markets']}>Markets</Text> */}
 
       {/* <FlatList
         horizontal={true}

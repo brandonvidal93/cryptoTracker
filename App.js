@@ -12,7 +12,7 @@ import * as Sentry from '@sentry/react-native';
 Sentry.init({
   dsn: 'https://1376efd079f34f649c71a402081f7d25@o4504397112147968.ingest.sentry.io/4504397113196544',
   maxBreadcrumbs: 150,
-  debug: true, // Sentry will try to print out useful debugging information if something goes wrong with sending an event. Set this to `false` in production.
+  debug: false, // Sentry will try to print out useful debugging information if something goes wrong with sending an event. Set this to `false` in production.
 
   // Release Health
   enableAutoSessionTracking: true,
@@ -71,7 +71,7 @@ const App = () => {
             ),
           }}
         />
-        <Tabs.Screen
+        {/* <Tabs.Screen
           name="User"
           component={UserStack}
           options={{
@@ -82,7 +82,7 @@ const App = () => {
               />
             ),
           }}
-        />
+        /> */}
       </Tabs.Navigator>
     </NavigationContainer>
   );
