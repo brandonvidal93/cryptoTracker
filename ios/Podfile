@@ -26,6 +26,12 @@ target 'cryptoTracker' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  pod 'react-native-camera', path: '../node_modules/react-native-camera', subspecs: [
+    'TextDetector',
+    'FaceDetectorMLKit',
+    'BarcodeDetectorMLKit'
+  ]
+
   target 'cryptoTrackerTests' do
     inherit! :complete
     # Pods for testing

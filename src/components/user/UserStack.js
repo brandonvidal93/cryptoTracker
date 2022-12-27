@@ -1,6 +1,8 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {UserScreen} from './UserScreen';
+import UserScreen from './UserScreen';
+import PictureScreen from './PictureScreen';
+import VideoScreen from './VideoScreen';
 
 import Colors from '../../res/colors';
 
@@ -18,6 +20,8 @@ const UserStack = () => {
         headerTintColor: Colors.white,
       }}>
       <Stack.Screen name="User Profile" component={UserScreen} />
+      <Stack.Screen name="Picture" component={PictureScreen} />
+      <Stack.Screen name="Video" component={VideoScreen} />
     </Stack.Navigator>
   );
 };
